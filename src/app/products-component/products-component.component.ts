@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../core/model/Product';
+import { CalculService } from '../services/calcul.service';
+import { ProductserviceService } from '../services/productservice.service';
 
 @Component({
   selector: 'app-products-component',
@@ -11,20 +13,21 @@ export class ProductsComponentComponent implements OnInit {
   title : string =  "ahmed" ; 
   listProdcut! : Product[];
   priceMax! : number ; 
+  alertStock!:number;
   
 
     
-  constructor() { }
+  constructor(private serviceProduit:ProductserviceService,private serviceCalcul:CalculService) { }
 
   ngOnInit(): void {
-    this.listProdcut
-    =[
-      {id: 1, title: "T-shirt 1", price: 18, quantity: 0, like: 0},
-      {id: 2, title: "T-shirt 2", price: 21, quantity: 10, like: 0},
-      {id: 3, title: "T-shirt 3", price: 16, quantity: 8, like: 0},  {id: 1, title: "T-shirt 1", price: 18, quantity: 0, like: 0},
-      {id: 2, title: "T-shirt 2", price: 21, quantity: 10, like: 0},
-      {id: 3, title: "T-shirt 3", price: 16, quantity: 8, like: 0}, ] ;
+    this.listProdcut=this.serviceProduit.listProduct;
+    
   }
+  getAlertStock(){
+
+    this.alertStock =this.serviceCalcul.getNumberOf(this.listProdcut,'quantity', 0);
+
+   }
   buy(i:number) {
     if(this.listProdcut[i].quantity>0)
     this.listProdcut[i].quantity--;
@@ -40,6 +43,7 @@ export class ProductsComponentComponent implements OnInit {
 
       console.log();
    }
+  
 
 }
 }

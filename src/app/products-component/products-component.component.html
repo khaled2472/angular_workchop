@@ -5,7 +5,8 @@
       <button class="btn btn-outline-success" type="submit">Search</button>
     </div>
   </div>
- 
+  <button class="btn btn-primary"  (click)="getAlertStock()">Alert</button>
+  {{alertStock}}
     <div class="card" style="width: 18rem;" *ngFor="let p of listProdcut ,let i=index">
       <div *ngIf="priceMax<p.price || priceMax==null">
       <img src="../../assets/images/5f0b7189031725.5de839cf50769.jpg" class="card-img-top" alt="...">
@@ -17,6 +18,7 @@
         <button href="#" class="btn btn-primary" (click)="buy(i)" [disabled]="p.quantity==0" style="margin-right: 5px;">buy</button> 
         <button href="#" class="btn btn-primary" (click)="like(i)">like</button>
         <button [routerLink]="[p.id] "class="btn btn-info" >Learn More</button>
+        
       </div>
       </div>
     </div>
